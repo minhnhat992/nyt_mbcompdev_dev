@@ -15,6 +15,15 @@ provider "google" {
   zone    = var.zone
 }
 
+terraform {
+  backend "gcs" {
+    credentials = "creds/nyt-mbcompdev-dev-a1198d97fac8.json"
+    bucket = "tf-composer-state-mb"
+    prefix = "cloud-composer-1"
+
+  }
+}
+
 resource "google_composer_environment" "cc_env_mb" {
   name    = "my-own-cc-2"
   project = var.project
