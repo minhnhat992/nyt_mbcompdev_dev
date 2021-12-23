@@ -25,7 +25,7 @@ terraform {
 }
 
 resource "google_composer_environment" "cc_env_mb" {
-  name    = "my-own-cc-2"
+  name    = "my-own-cc"
   project = var.project
   region  = var.region
   config {
@@ -81,7 +81,7 @@ resource "google_service_account" "cc_env_mb" {
   display_name = "Test Service Account for Composer Environment"
 }
 
-resource "google_project_iam_member" "composer-worker" {
+resource "google_project_iam_member" "cc_env_mb" {
   project = var.project
   role    = "roles/composer.worker"
   member  = "serviceAccount:${google_service_account.cc_env_mb.email}"

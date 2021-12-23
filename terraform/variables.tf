@@ -3,7 +3,7 @@ variable "project" {
 }
 
 variable "credentials_file" {
-  default = "creds/nyt-mbcompdev-dev-9728dd97d09d.json"
+  default = "creds/nyt-mbcompdev-dev-5c351ded4d94.json"
 }
 
 variable "region" {
