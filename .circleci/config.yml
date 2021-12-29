@@ -16,8 +16,8 @@ jobs:
       - run:
           name: ls file
           command: | 
-          cd /terraform/creds
-          ls
+          cd /terraform/creds && ls
+
 
       - run:
           name: terraform init
