@@ -10,11 +10,10 @@ jobs:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
-      - run: cd terraform && ls
-      - run : ls
       - run:
           name: terraform init
           command: |
+            cd terraform
             terraform init --upgrade
             terraform plan
   terraform-apply:
