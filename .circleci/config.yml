@@ -11,14 +11,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: ls file
-          command: ls terraform
+          name: create creds dir
+          command: mkdir terraform/creds
       - run:
           name: save to local
-          command: echo $terraform_context_key > /terraform/terraform_context_key.json
+          command: echo $terraform_context_key > terraform/creds/terraform_context_key.json
       - run:
           name: ls file
-          command: ls terraform
+          command: ls terraform/creds
       - run:
           name: terraform init
           command: |
