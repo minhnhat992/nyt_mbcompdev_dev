@@ -10,7 +10,7 @@ jobs:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
-      - run: cd terraform
+      - run: cd terraform && ls
       - run : ls
       - run:
           name: terraform init
