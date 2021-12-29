@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: save to local
-          command: echo $terraform_context_key > /terraform/creds/$terraform_context_key.json
+          command: echo $terraform_context_key > /terraform/creds/terraform_context_key.json
       - run:
           name: ls file
           command: ls terraform/creds
