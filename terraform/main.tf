@@ -16,12 +16,7 @@ provider "google" {
 }
 
 terraform {
-  backend "gcs" {
-    credentials = file(var.gcs_credentials_file)
-    bucket = "tf-composer-state-mb"
-    prefix = "cloud-composer-1"
-
-  }
+  backend "gcs" {}
 }
 
 resource "google_composer_environment" "cc_env_mb" {

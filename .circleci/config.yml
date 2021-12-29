@@ -28,10 +28,9 @@ jobs:
             cd terraform
             terraform init --upgrade \
             -var terraform_credentials_file="creds/terraform_context_key.json"
-            -var gcs_credentials_file="creds/terraform_gcs_backend.json"
-            terraform plan \
+            -backend-config="gcs_backend_circle.conf"
             -var terraform_credentials_file="creds/terraform_context_key.json"
-            -var gcs_credentials_file="creds/terraform_gcs_backend.json"
+            -backend-config="gcs_backend_circle.conf"
   terraform-apply:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
