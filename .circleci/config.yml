@@ -21,9 +21,7 @@ jobs:
           command: echo $terraform_gcs_backend > terraform/creds/terraform_gcs_backend.json
       - run:
           name: ls file
-          command: |
-          ls terraform/creds
-          cat terraform/creds/terraform_context_key.json
+          command: cat terraform/creds/terraform_context_key.json
       - run:
           name: terraform init
           command: |
