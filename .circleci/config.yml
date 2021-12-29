@@ -34,28 +34,34 @@ jobs:
           command: |
             cd terraform
             terraform plan \
-            -var terraform_credentials_file="creds/terraform_context_key.json"
+            -var terraform_credentials_file="creds/terraform_context_key.json" \
+            -out tfapply
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   terraform-apply:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
-      - checkout
-      - run:
-          name: create creds dir
-          command: mkdir terraform/creds
-      - run:
-          name: save terraform composer key to local
-          command: echo $terraform_context_key > terraform/creds/terraform_context_key.json
-      - run:
-          name: save terraform gcs key to local
-          command: echo $terraform_gcs_backend > terraform/creds/terraform_gcs_backend.json
+      - attach_workspace:
+          at: .
+#      - checkout
+#      - run:
+#          name: create creds dir
+#          command: mkdir terraform/creds
+#      - run:
+#          name: save terraform composer key to local
+#          command: echo $terraform_context_key > terraform/creds/terraform_context_key.json
+#      - run:
+#          name: save terraform gcs key to local
+#          command: echo $terraform_gcs_backend > terraform/creds/terraform_gcs_backend.json
       - run:
           name: terraform apply
           command: |
             cd terraform
-            terraform apply --auto-approve \
-            -var terraform_credentials_file="creds/terraform_context_key.json" \
-            -backend-config="gcs_backend_circle.conf"
+            terraform apply --auto-approve tfapply \
+            -var terraform_credentials_file="creds/terraform_context_key.json"
 
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:

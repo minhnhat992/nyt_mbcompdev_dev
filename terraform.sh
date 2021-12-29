@@ -4,7 +4,7 @@ terraform init --upgrade  -reconfigure  \
 -backend-config=gcs_backend_local.conf
 
 terraform plan \
--var terraform_credentials_file="creds/nyt-mbcompdev-dev-5c351ded4d94.json"
-
+-var terraform_credentials_file="creds/nyt-mbcompdev-dev-5c351ded4d94.json" \
+-out tfapply
 
 terraform apply --auto-approve
