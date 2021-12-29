@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file(var.credentials_file)
+  credentials = file(var.terraform_credentials_file)
 
   project = var.project
   region  = var.region
@@ -17,7 +17,7 @@ provider "google" {
 
 terraform {
   backend "gcs" {
-    credentials = "creds/nyt-mbcompdev-dev-a1198d97fac8.json"
+    credentials = file(var.gcs_credentials_file)
     bucket = "tf-composer-state-mb"
     prefix = "cloud-composer-1"
 

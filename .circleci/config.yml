@@ -19,17 +19,19 @@ jobs:
       - run:
           name: save terraform gcs key to local
           command: echo $terraform_gcs_backend > terraform/creds/terraform_gcs_backend.json
-      - run:
-          name: ls file
-          command: cat terraform/creds/terraform_context_key.json
+      #      - run:
+      #          name: ls file
+      #          command: cat terraform/creds/terraform_context_key.json
       - run:
           name: terraform init
           command: |
             cd terraform
             terraform init --upgrade \
-            -var credentials_file="creds/terraform_context_key.json"
+            -var terraform_credentials_file="creds/terraform_context_key.json"
+            -var gcs_credentials_file="creds/terraform_gcs_backend.json"
             terraform plan \
-            -var credentials_file="creds/terraform_context_key.json"
+            -var terraform_credentials_file="creds/terraform_context_key.json"
+            -var gcs_credentials_file="creds/terraform_gcs_backend.json"
   terraform-apply:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
