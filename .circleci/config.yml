@@ -11,8 +11,8 @@ jobs:
     steps:
       - checkout
       - run:
-          - name: echo
-          - command: echo $terraform_context_key
+          name: echo
+          command: echo $terraform_context_key
       - run:
           name: terraform init
           command: |
