@@ -12,6 +12,7 @@ jobs:
     steps:
       - checkout
       - run: cd terraform
+      - run : ls
       - run:
           name: terraform init
           command: |
