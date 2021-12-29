@@ -11,6 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
+          - name: echo
+          - command: echo $terraform_context_key
+      - run:
           name: terraform init
           command: |
             cd terraform
@@ -31,8 +34,12 @@ jobs:
 workflows:
   terraform-plan-apply-destroy:
     jobs:
-      - terraform-plan
+      - terraform-plan:
+          context:
+            - mb_terraform_context
       - terraform-apply:
+          context:
+            - mb_terraform_context
           requires:
             - terraform-plan
 
