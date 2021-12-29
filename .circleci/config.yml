@@ -27,9 +27,9 @@ jobs:
           command: |
             cd terraform
             terraform init --upgrade \
-            -var credentials_file="terraform/creds/terraform_context_key.json"
+            -var credentials_file="creds/terraform_context_key.json"
             terraform plan \
-            -var credentials_file="terraform/creds/terraform_context_key.json"
+            -var credentials_file="creds/terraform_context_key.json"
   terraform-apply:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
