@@ -60,8 +60,7 @@ jobs:
           name: terraform apply
           command: |
             cd terraform
-            terraform apply --auto-approve tfapply \
-            -var terraform_credentials_file="creds/terraform_context_key.json"
+            terraform apply --auto-approve tfapply
 
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
