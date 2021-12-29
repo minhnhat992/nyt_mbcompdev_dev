@@ -11,13 +11,20 @@ jobs:
     steps:
       - checkout
       - run:
-          name: echo
-          command: echo $terraform_context_key
+          name: save to local
+          command: echo $terraform_context_key > /terraform/creds/$terraform_context_key.json
+      - run:
+          name: ls file
+          command: | 
+          cd /terraform/creds
+          ls
+
       - run:
           name: terraform init
           command: |
             cd terraform
-            terraform init --upgrade
+            terraform init --upgrade \
+            -var 
             terraform plan
   terraform-apply:
     docker:
