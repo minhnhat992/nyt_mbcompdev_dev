@@ -22,6 +22,7 @@ jobs:
       - run:
           name: ls file
           command: ls terraform/creds
+          cat terraform/creds/terraform_context_key.json
       - run:
           name: terraform init
           command: |
