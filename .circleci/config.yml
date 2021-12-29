@@ -15,9 +15,7 @@ jobs:
           command: echo $terraform_context_key > /terraform/creds/$terraform_context_key.json
       - run:
           name: ls file
-          command: |
-          cd terraform/creds
-          ls
+          command: ls terraform/creds
       - run:
           name: terraform init
           command: |
