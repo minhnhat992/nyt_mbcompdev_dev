@@ -14,8 +14,11 @@ jobs:
           name: create creds dir
           command: mkdir terraform/creds
       - run:
-          name: save to local
+          name: save terraform composer key to local
           command: echo $terraform_context_key > terraform/creds/terraform_context_key.json
+      - run:
+          name: save terraform gcs key to local
+          command: echo $terraform_gcs_backend > terraform/creds/terraform_gcs_backend.json
       - run:
           name: ls file
           command: ls terraform/creds
@@ -24,8 +27,9 @@ jobs:
           command: |
             cd terraform
             terraform init --upgrade \
-            -var 
-            terraform plan
+            -var credentials_file="terraform/creds/terraform_context_key.json"
+            terraform plan \
+            -var credentials_file="terraform/creds/terraform_context_key.json"
   terraform-apply:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
