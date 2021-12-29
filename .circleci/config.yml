@@ -27,9 +27,10 @@ jobs:
           command: |
             cd terraform
             terraform init --upgrade \
-            -var terraform_credentials_file="creds/terraform_context_key.json"
+            -var terraform_credentials_file="creds/terraform_context_key.json" \
             -backend-config="gcs_backend_circle.conf"
-            -var terraform_credentials_file="creds/terraform_context_key.json"
+            terraform plan \
+            -var terraform_credentials_file="creds/terraform_context_key.json" \
             -backend-config="gcs_backend_circle.conf"
   terraform-apply:
     docker:
