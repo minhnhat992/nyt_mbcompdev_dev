@@ -11,6 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: ls file
+          command: ls terraform
+      - run:
           name: save to local
           command: echo $terraform_context_key > /terraform/terraform_context_key.json
       - run:
