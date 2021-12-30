@@ -4,6 +4,9 @@ version: 2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+orbs:
+  gcp-cli: circleci/gcp-cli@2.4.0
+
 jobs:
   terraform-plan:
     working_directory: ~/terraform
@@ -54,7 +57,10 @@ jobs:
             terraform apply --auto-approve tfapply
   move-dag-file:
     docker:
-      - image: google/cloud-sdk
+      - image: google/cloud-sdk:latest
+    steps:
+      - attach_workspace:
+          at: .
 
       # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
