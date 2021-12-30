@@ -59,8 +59,15 @@ jobs:
     docker:
       - image: google/cloud-sdk:latest
     steps:
-      - attach_workspace:
-          at: .
+      - gcp-cli/install:
+          version: "363.0.0"
+      - gcp-cli/initialize:
+          gcloud-service-key: terraform_context_key
+          google-project-id: GOOGLE_PROJECT_ID
+      - checkout
+      - run:
+          name: move file to dags
+          command: gsutil rsync -d -r dags 'gs://'${COMPOSER_GCS_BUCKET}'/dags'
 
       # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -74,4 +81,8 @@ workflows:
             - mb_terraform_context
           requires:
             - terraform-plan
-
+      -  move-dag-file:
+           context:
+             - mb_terraform_context
+           requires:
+             - terraform-apply
